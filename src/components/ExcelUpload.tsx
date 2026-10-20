@@ -1,4 +1,4 @@
-import { useRef, useState, type ChangeEvent } from "react";
+import { useRef, useState, type ChangeEvent, type DragEvent } from "react";
 
 import { buildReportDataFromFile } from "../services/reportDataService";
 import type { ReportDataSet } from "../services/reportDataService";
@@ -15,9 +15,9 @@ export default function ExcelUpload({
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
 
-  const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
+  const handleFile = async (file: File | undefined) => {
     if (!file) return;
 
     try {
@@ -41,8 +41,34 @@ export default function ExcelUpload({
     }
   };
 
+  const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
+    await handleFile(event.target.files?.[0]);
+  };
+
+  const handleDrop = async (event: DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    setIsDragging(false);
+    await handleFile(event.dataTransfer.files?.[0]);
+  };
+
+  const handleDragOver = (event: DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = (event: DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    setIsDragging(false);
+  };
+
   return (
-    <div className="excel-upload" aria-live="polite">
+    <div
+      className={`excel-upload ${isDragging ? "dragging" : ""}`}
+      aria-live="polite"
+      onDrop={handleDrop}
+      onDragOver={handleDragOver}
+      onDragLeave={handleDragLeave}
+    >
       <div className="upload-copy">
         <strong>Planilha de dados</strong>
         <span>{currentFileName || "Nenhuma planilha carregada"}</span>
