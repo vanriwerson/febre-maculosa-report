@@ -1,3 +1,4 @@
+export { default as ExcelUpload } from "./ExcelUpload";
 export { default as KpiGrid } from "./KpiGrid";
 export { default as KpiCard } from "./KpiCard";
 export { default as LocalityTable } from "./LocalityTable";

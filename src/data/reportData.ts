@@ -87,3 +87,9 @@ export const localities: Locality[] = [
     percentage: "11,3%",
   },
 ];
+
+export const defaultReportData = {
+  meta: reportMeta,
+  kpis,
+  localities,
+};

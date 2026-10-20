@@ -20,6 +20,62 @@ body {
   background: #ffffff;
 }
 
+.excel-upload {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin: 0 0 18px;
+  padding: 14px 16px;
+  border: 1px solid #dbe4ef;
+  border-radius: 10px;
+  background: #f8fafc;
+}
+
+.upload-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: #34445d;
+}
+
+.upload-copy strong {
+  font-size: 13px;
+  color: #1f2937;
+}
+
+.upload-copy span {
+  font-size: 12px;
+  color: #61738f;
+}
+
+.upload-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: #117a70;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 12px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.upload-button:hover {
+  opacity: 0.95;
+}
+
+.excel-upload input {
+  display: none;
+}
+
+.upload-error {
+  color: #b91c1c;
+  font-size: 11px;
+}
+
 .report-page {
   width: min(100% - 48px, 824px);
   min-height: 1120px;
